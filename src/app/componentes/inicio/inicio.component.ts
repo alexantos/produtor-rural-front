@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProdutorService } from '../services/produtor.service';
+import { ProdutorService } from '../../services/produtor.service';
 
 @Component({
 	selector: 'app-inicio',

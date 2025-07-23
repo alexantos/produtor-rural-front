@@ -1,0 +1,35 @@
+<div class="flex flex-row justify-between">
+    <div class="flex flex-col bg-white items-center justify-center px-5">
+        <div>
+            97
+        </div>
+        <div>
+            Produtores
+        </div>
+    </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Fill form field</mat-label>
+        <input matInput placeholder="Placeholder">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+</div>
+<div class="flex flex-row justify-end pt-2">
+    <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer" (click)="adicionarProdutor()">
+        Adicionar
+    </button>
+</div>
+<div class="pt-6 gap-6">
+    <div class="flex flex-row bg-white hover:bg-gray-200 rounded w-full cursor-pointer p-4 gap-6" (click)="navega('produtor', 'uuid')">
+        <div class="flex flex-col w-24 h-24 rounded-full bg-green-500 text-white items-center justify-center">
+            AN
+        </div>
+        <div class="flex flex-col justify-center gap-1">
+            <div class="text-3xl font-medium">
+                Alexandre Nascimento
+            </div>
+            <div class="text-lg text-gray-800">
+                123.456.789-00
+            </div>
+        </div>
+    </div>
+</div>

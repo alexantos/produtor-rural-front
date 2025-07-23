@@ -1,6 +1,6 @@
 export interface ModelBase {
-    id: string;
+    id?: string;
 
-    criacao: Date;
-    atualizacao: Date;
+    criacao?: Date;
+    atualizacao?: Date;
 }
