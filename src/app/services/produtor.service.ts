@@ -13,7 +13,4 @@ export class ProdutorService extends BaseService<Produtor> {
         super('produtor/', http);
     }
 
-    // viaCep(cep: string): Observable<ViaCep> {
-    //     return this.http.get<ViaCep>('https://viacep.com.br/ws/' + cep + '/json/')
-    // }
 }
