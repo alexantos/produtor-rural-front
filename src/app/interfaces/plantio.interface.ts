@@ -8,4 +8,7 @@ export interface Plantio extends ModelBase {
     safra: Safra;
     propriedade: Propriedade;
     observacao?: string;
+
+    'cultura_descricao'?: string;
+    'safra_descricao'?: string;
 }

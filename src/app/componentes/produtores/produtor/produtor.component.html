@@ -1,40 +1,30 @@
+<div class="flex flex-row justify-between pt-4">
+    <span class="text-4xl font-medium">Produtor</span>
+</div>
 <div class="flex flex-row justify-between gap-6 w-full h-20">
     <div class="flex flex-col bg-white items-center justify-center w-full">
         <div>
-            97
+            {{cards.quantidade_propriedades}}
         </div>
         <div>
-            Produtores
-        </div>
-    </div>
-    <div class="flex flex-col bg-white items-center justify-center w-full">
-        <div>
-            97
-        </div>
-        <div>
-            Produtores
+            Propriedades
         </div>
     </div>
     <div class="flex flex-col bg-white items-center justify-center w-full">
         <div>
-            97
-        </div>
-        <div>
-            Produtores
+            {{cards.total_hectar}} ha
         </div>
     </div>
     <div class="flex flex-col bg-white items-center justify-center w-full">
         <div>
-            97
+            {{cards.quantidade_culturas}} Culturas
         </div>
+    </div>
+    <div class="flex flex-col bg-white items-center justify-center w-full">
         <div>
-            Produtores
+            {{cards.quantidade_safras}} Safras
         </div>
     </div>
 </div>
-<div class="flex flex-row justify-end pt-4">
-    <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer" (click)="adicionarPropriedade()">
-        Adicionar
-    </button>
-</div>
+
 <app-propriedades></app-propriedades>

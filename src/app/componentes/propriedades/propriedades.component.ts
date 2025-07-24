@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Propriedade } from '../../interfaces/propriedade.interface';
 import { PropriedadeService } from '../../services/propriedade.service';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { AdicionarPropriedadeComponent } from './adicionar-propriedade/adicionar-propriedade.component';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
 	selector: 'app-propriedades',
@@ -14,6 +17,12 @@ import { CommonModule } from '@angular/common';
 export class PropriedadesComponent {
 
 	router = inject(Router)
+
+	readonly dialog = inject(MatDialog);
+
+	readonly activatedRoute = inject(ActivatedRoute);
+
+	readonly produtor_id = this.activatedRoute.snapshot.paramMap.get('id');
 
 	readonly propriedadeService = inject(PropriedadeService);
 
@@ -30,7 +39,8 @@ export class PropriedadesComponent {
 
 
 	listaPropriedades() {
-		this.propriedadeService.listar().subscribe({
+		let params: HttpParams = new HttpParams().set('produtor__id', this.produtor_id as string);
+		this.propriedadeService.listar(params).subscribe({
 			next: (resultado: Propriedade[]) => {
 				this.propriedades = resultado;
 			}
@@ -38,5 +48,11 @@ export class PropriedadesComponent {
 	}
 
 
-
+	adicionarPropriedade() {
+		this.dialog.open(AdicionarPropriedadeComponent, {
+			data: {
+				produtor_id: this.produtor_id,
+			},
+		});
+	}
 }

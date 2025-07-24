@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PropriedadesComponent } from "../../propriedades/propriedades.component";
-import { AdicionarPropriedadeComponent } from '../../propriedades/adicionar-propriedade/adicionar-propriedade.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { ProdutorService } from '../../../services/produtor.service';
 
 @Component({
 	selector: 'app-produtor',
@@ -11,17 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 	templateUrl: './produtor.component.html',
 	styleUrl: './produtor.component.scss'
 })
-export class ProdutorComponent {
-	readonly dialog = inject(MatDialog);
+export class ProdutorComponent implements OnInit {
+	readonly produtorService: ProdutorService = inject(ProdutorService);
 	readonly activatedRoute = inject(ActivatedRoute);
 
 	readonly produtor_id = this.activatedRoute.snapshot.paramMap.get('id');
 
-	adicionarPropriedade() {
-		this.dialog.open(AdicionarPropriedadeComponent, {
-			data: {
-				produtor_id: this.produtor_id,
-			},
+	cards: any = {};
+
+	ngOnInit(): void {
+		this.produtorService.cardsProdutor(this.produtor_id as string).subscribe((resultado) => {
+			console.log('Resultado: ', resultado);
+			this.cards = resultado;
 		});
 	}
 }

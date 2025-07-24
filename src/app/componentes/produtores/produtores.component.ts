@@ -45,6 +45,9 @@ export class ProdutoresComponent {
 	}
 
 	adicionarProdutor() {
-		this.dialog.open(AdicionarProdutorComponent);
+		let dialogRef = this.dialog.open(AdicionarProdutorComponent);
+		dialogRef.afterClosed().subscribe((resultado) => {
+			this.listaProdutores();
+		});
 	}
 }

@@ -3,12 +3,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PropriedadeService } from '../../../services/propriedade.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Propriedade } from '../../../interfaces/propriedade.interface';
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NgxCurrencyDirective } from "ngx-currency";
+
 
 @Component({
 	selector: 'app-adicionar-propriedade',
@@ -20,11 +22,14 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 		MatIconModule,
 		ReactiveFormsModule,
 		MatSelectModule,
+		NgxCurrencyDirective
 	],
 	templateUrl: './adicionar-propriedade.component.html',
 	styleUrl: './adicionar-propriedade.component.scss'
 })
 export class AdicionarPropriedadeComponent implements OnInit {
+
+	readonly dialogRef = inject(MatDialogRef<AdicionarPropriedadeComponent>);
 
 	readonly propriedadeService = inject(PropriedadeService);
 
@@ -35,18 +40,31 @@ export class AdicionarPropriedadeComponent implements OnInit {
 	produtor_id: string = '';
 
 	propriedade: FormGroup = new FormGroup({
-		nome: new FormControl('', []),
-		produtor: new FormControl(this.data.produtor_id, []),
-		cidade: new FormControl('', []),
-		estado: new FormControl('', []),
-		area_total_fazenda: new FormControl('', []),
-		area_agricultavel: new FormControl('', []),
-		area_vegetacao: new FormControl('', []),
+		nome: new FormControl('', [Validators.required,]),
+		produtor: new FormControl(this.data.produtor_id, [Validators.required,]), //Produtor recuperado pelo id da rota
+		cidade: new FormControl('', [Validators.required,]),
+		estado: new FormControl('', [Validators.required,]),
+		area_total_fazenda: new FormControl('', [Validators.required,]),
+		area_agricultavel: new FormControl('', [Validators.required,]),
+		area_vegetacao: new FormControl('', [Validators.required,]),
 	});
 
 	ngOnInit(): void {
 		// this.listaProdutores();
-		// this.produtor_id = this.activatedRoute.snapshot.paramMap.get('id')
+		this.propriedade.controls['area_total_fazenda'].valueChanges.subscribe(value => this.verificaTotalFazenda());
+		this.propriedade.controls['area_agricultavel'].valueChanges.subscribe(value => this.verificaTotalFazenda());
+		this.propriedade.controls['area_vegetacao'].valueChanges.subscribe(value => this.verificaTotalFazenda());
+	}
+
+	verificaTotalFazenda() {
+		let area_total = this.propriedade.controls['area_total_fazenda'].value;
+		let area_agricultavel = this.propriedade.controls['area_agricultavel'].value;
+		let area_vegetacao = this.propriedade.controls['area_vegetacao'].value;
+		if ((area_agricultavel + area_vegetacao) > area_total) {
+			this.propriedade.controls['area_total_fazenda'].setErrors({ area: true });
+		} else {
+			this.propriedade.controls['area_total_fazenda'].setErrors(null);
+		}
 	}
 
 	// listaProdutores() {
@@ -58,11 +76,14 @@ export class AdicionarPropriedadeComponent implements OnInit {
 	// }
 
 	adicionarPropriedade() {
-		console.log('Propriedade salvar: ', this.propriedade)
 		this.propriedadeService.salvar(this.propriedade.value as any).subscribe({
 			next: (resultado: Propriedade) => {
-				console.log('Produtor cadastrado: ', resultado)
+				this.fechar();
 			}
-		})
+		});
+	}
+
+	fechar() {
+		this.dialogRef.close();
 	}
 }

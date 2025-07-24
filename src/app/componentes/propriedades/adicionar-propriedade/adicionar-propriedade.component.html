@@ -1,9 +1,9 @@
 <div class="p-10">
     <form [formGroup]="propriedade">
         <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Fill form field</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="nome">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="Digite o nome da propriedade" formControlName="nome">
+            <mat-error *ngIf="propriedade.controls['nome'].getError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
         <!-- <mat-form-field appearance="fill" class="w-full">
             <mat-label>Fill form field</mat-label>
@@ -14,35 +14,82 @@
             </mat-select>
         </mat-form-field> -->
         <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Fill form field</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="cidade">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-label>Cidade</mat-label>
+            <input matInput placeholder="Digite a cidade da propriedade" formControlName="cidade">
+            <mat-error *ngIf="propriedade.controls['cidade'].getError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Fill form field</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="estado">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Fill form field</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="area_total_fazenda">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Fill form field</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="area_agricultavel">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Fill form field</mat-label>
-            <input matInput placeholder="Placeholder" formControlName="area_vegetacao">
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        </mat-form-field>
+        <div class="flex flex-row gap-2">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado">
+                    <mat-option [value]="'AC'">Acre</mat-option>
+                    <mat-option [value]="'AL'">Alagoas</mat-option>
+                    <mat-option [value]="'AP'">Amapá</mat-option>
+                    <mat-option [value]="'AM'">Amazonas</mat-option>
+                    <mat-option [value]="'BA'">Bahia</mat-option>
+                    <mat-option [value]="'CE'">Ceará</mat-option>
+                    <mat-option [value]="'ES'">Espírito Santo</mat-option>
+                    <mat-option [value]="'GO'">Goiás</mat-option>
+                    <mat-option [value]="'MA'">Maranhão</mat-option>
+                    <mat-option [value]="'MT'">Mato Grosso</mat-option>
+                    <mat-option [value]="'MS'">Mato Grosso do Sul</mat-option>
+                    <mat-option [value]="'MG'">Minas Gerais</mat-option>
+                    <mat-option [value]="'PA'">Pará</mat-option>
+                    <mat-option [value]="'PB'">Paraíba</mat-option>
+                    <mat-option [value]="'PR'">Paraná</mat-option>
+                    <mat-option [value]="'PE'">Pernambuco</mat-option>
+                    <mat-option [value]="'PI'">Piauí</mat-option>
+                    <mat-option [value]="'RJ'">Rio de Janeiro</mat-option>
+                    <mat-option [value]="'RN'">Rio Grande do Norte</mat-option>
+                    <mat-option [value]="'RS'">Rio Grande do Sul</mat-option>
+                    <mat-option [value]="'RO'">Rondônia</mat-option>
+                    <mat-option [value]="'RR'">Roraima</mat-option>
+                    <mat-option [value]="'SC'">Santa Catarina</mat-option>
+                    <mat-option [value]="'SP'">São Paulo</mat-option>
+                    <mat-option [value]="'SE'">Sergipe</mat-option>
+                    <mat-option [value]="'TO'">Tocantins</mat-option>
+                    <mat-option [value]="'DF'">Distrito Federal</mat-option>
+                </mat-select>
+                <mat-error *ngIf="propriedade.controls['estado'].getError('required')">Campo obrigatório</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Área total</mat-label>
+                <input matInput placeholder="Digite a área total da propriedade" formControlName="area_total_fazenda"
+                    [currencyMask]="{ prefix: '', suffix: ' ha', thousands: '.', decimal: ',', precision: 1, max: 1000, }">
+                <mat-error *ngIf="propriedade.controls['area_total_fazenda'].getError('required')">
+                    Campo obrigatório
+                </mat-error>
+                <mat-error *ngIf="propriedade.controls['area_total_fazenda'].getError('area')">
+                    Há inconsistência na área total da fazenda
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex flex-row gap-2">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Área agricultável</mat-label>
+                <input matInput placeholder="Digite a área agricultável da propriedade"
+                    formControlName="area_agricultavel"
+                    [currencyMask]="{ prefix: '', suffix: ' ha', thousands: '.', decimal: ',', precision: 1, max: 1000, }">
+                <mat-error *ngIf="propriedade.controls['area_agricultavel'].getError('required')">
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Área de vegetação</mat-label>
+                <input matInput placeholder="Digite a área de vegetação da propriedade" formControlName="area_vegetacao"
+                    [currencyMask]="{ prefix: '', suffix: ' ha', thousands: '.', decimal: ',', precision: 1, max: 1000, }">
+                <mat-error *ngIf="propriedade.controls['area_vegetacao'].getError('required')">
+                    Campo obrigatório
+                </mat-error>
+            </mat-form-field>
+        </div>
         <div class="flex flex-row justify-between">
-            <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+            <button (click)="fechar()" class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
                 Cancelar
             </button>
-            <button (click)="adicionarPropriedade()" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+            <button (click)="adicionarPropriedade()" [disabled]="!propriedade.valid"
+                [ngClass]="propriedade.valid ? 'bg-green-500 hover:bg-green-600': 'bg-green-200'"
+                class="text-white font-medium py-2 px-4 rounded cursor-pointer">
                 Adicionar
             </button>
         </div>

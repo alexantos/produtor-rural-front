@@ -1,18 +1,21 @@
-<div class="flex flex-row justify-end pt-4">
-    <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer" (click)="adicionarPlantio()">
+<div class="flex flex-row justify-between pt-4">
+    <span class="text-4xl font-medium">Plantios</span>
+    <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer"
+        (click)="adicionarPlantio()">
         Adicionar
     </button>
 </div>
 
 <div class="flex flex-col pt-6 gap-6">
-    <div class="flex flex-row bg-white hover:bg-gray-200 rounded w-full cursor-pointer p-4 gap-6"
-        (click)="navega('plantio', 'uuid')">
+    <div *ngFor="let plantio of plantios"
+        class="flex flex-row bg-white hover:bg-gray-200 rounded w-full cursor-pointer p-4 gap-6"
+        (click)="navega('plantio', plantio.id)">
         <div class="flex flex-col justify-center gap-1">
             <div class="text-3xl font-medium">
-                Nome da cultura safra
+                {{ plantio.cultura_descricao }}
             </div>
             <div class="text-lg text-gray-800">
-                123.456.789-00
+                {{ plantio.safra_descricao }}
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CulturaService } from '../../../services/cultura.service';
 import { SafraService } from '../../../services/safra.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlantioService } from '../../../services/plantio.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Plantio } from '../../../interfaces/plantio.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -11,17 +11,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Safra } from '../../../interfaces/safra.interface';
 import { Cultura } from '../../../interfaces/cultura.interface';
-import { map, Observable, of, startWith } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { map, max, Observable, of, startWith } from 'rxjs';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'app-adicionar-plantio',
 	standalone: true,
-	imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, MatAutocompleteModule, AsyncPipe],
+	imports: [CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, MatAutocompleteModule, AsyncPipe],
+	providers: [],
 	templateUrl: './adicionar-plantio.component.html',
 	styleUrl: './adicionar-plantio.component.scss'
 })
 export class AdicionarPlantioComponent implements OnInit {
+
+	readonly dialogRef = inject(MatDialogRef<AdicionarPlantioComponent>);
+
 	readonly plantioService = inject(PlantioService);
 
 	// readonly propriedadeService = inject(PropriedadeService);
@@ -38,8 +42,8 @@ export class AdicionarPlantioComponent implements OnInit {
 	safraSelecionada: Safra | null = null;
 
 	plantio: FormGroup = new FormGroup({
-		cultura: new FormControl('', []),
-		safra: new FormControl('', []),
+		cultura: new FormControl('', [Validators.required]),
+		safra: new FormControl('', [Validators.required, Validators.max(new Date().getFullYear()), Validators.min(1900)]),
 		propriedade: new FormControl(this.data.propriedade_id, []),
 		observacoes: new FormControl('', []),
 	});
@@ -61,6 +65,7 @@ export class AdicionarPlantioComponent implements OnInit {
 		this.culturaService.listar().subscribe({
 			next: (resultado: Cultura[]) => {
 				this.culturas = resultado;
+				this.culturaFiltradas = of(this.culturas);
 			}
 		})
 	}
@@ -69,6 +74,7 @@ export class AdicionarPlantioComponent implements OnInit {
 		this.safraService.listar().subscribe({
 			next: (resultado: Safra[]) => {
 				this.safras = resultado;
+				this.safraFiltradas = of(this.safras);
 			}
 		})
 	}
@@ -118,6 +124,10 @@ export class AdicionarPlantioComponent implements OnInit {
 				console.log('Plantio cadastrado: ', resultado)
 			}
 		});
+	}
+
+	fechar() {
+		this.dialogRef.close();
 	}
 
 	private _filtraCulturas(value: string): Cultura[] {
