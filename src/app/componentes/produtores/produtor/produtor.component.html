@@ -1,28 +1,57 @@
-<div class="flex flex-row justify-between pt-4">
-    <span class="text-4xl font-medium">Produtor</span>
+<div class="flex flex-row justify-between">
+    <span class="text-4xl py-4  font-light">Produtor {{produtor!.nome}}</span>
 </div>
-<div class="flex flex-row justify-between gap-6 w-full h-20">
-    <div class="flex flex-col bg-white items-center justify-center w-full">
-        <div>
-            {{cards.quantidade_propriedades}}
+<div class="flex flex-row justify-between gap-6 w-full py-4 ">
+    <div class="flex flex-row rounded-lg bg-white border-l-4 border-[#bf5100] w-full">
+        <div class="flex flex-col w-9/12 items-center">
+            <div class="text-3xl text-gray-800">
+                {{cards.quantidade_propriedades}}
+            </div>
+            <div class="text-gray-800 font-light">
+                Propriedades
+            </div>
         </div>
-        <div>
-            Propriedades
-        </div>
-    </div>
-    <div class="flex flex-col bg-white items-center justify-center w-full">
-        <div>
-            {{cards.total_hectar}} ha
-        </div>
-    </div>
-    <div class="flex flex-col bg-white items-center justify-center w-full">
-        <div>
-            {{cards.quantidade_culturas}} Culturas
+        <div class="flex flex-col w-3/12 justify-center items-start">
+            <mat-icon class="text-gray-800">home</mat-icon>
         </div>
     </div>
-    <div class="flex flex-col bg-white items-center justify-center w-full">
-        <div>
-            {{cards.quantidade_safras}} Safras
+    <div class="flex flex-row rounded-lg bg-white border-l-4 border-[#bf5100] w-full">
+        <div class="flex flex-col w-9/12 items-center">
+            <div class="text-3xl text-gray-800">
+                {{cards.total_hectar}}
+            </div>
+            <div class="text-gray-800 font-light">
+                Hectares
+            </div>
+        </div>
+        <div class="flex flex-col w-3/12 justify-center items-start">
+            <mat-icon class="text-gray-800">map</mat-icon>
+        </div>
+    </div>
+    <div class="flex flex-row rounded-lg bg-white border-l-4 border-[#bf5100] w-full">
+        <div class="flex flex-col w-9/12 items-center">
+            <div class="text-3xl text-gray-800">
+                {{cards.quantidade_culturas}}
+            </div>
+            <div class="text-gray-800 font-light">
+                Culturas
+            </div>
+        </div>
+        <div class="flex flex-col w-3/12 justify-center items-start">
+            <mat-icon class="text-gray-800">grass</mat-icon>
+        </div>
+    </div>
+     <div class="flex flex-row rounded-lg bg-white border-l-4 border-[#bf5100] w-full">
+        <div class="flex flex-col w-9/12 items-center">
+            <div class="text-3xl text-gray-800">
+                 {{cards.quantidade_safras}}
+            </div>
+            <div class="text-gray-800 font-light">
+                Safras
+            </div>
+        </div>
+        <div class="flex flex-col w-3/12 justify-center items-start">
+            <mat-icon class="text-gray-800">front_loader</mat-icon>
         </div>
     </div>
 </div>

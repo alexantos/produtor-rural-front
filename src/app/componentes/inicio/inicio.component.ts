@@ -3,11 +3,12 @@ import { ProdutorService } from '../../services/produtor.service';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import { GraficoService } from '../../services/grafico.service';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
 	selector: 'app-inicio',
 	standalone: true,
-	imports: [BaseChartDirective],
+	imports: [BaseChartDirective, MatIcon],
 	templateUrl: './inicio.component.html',
 	styleUrl: './inicio.component.scss'
 })

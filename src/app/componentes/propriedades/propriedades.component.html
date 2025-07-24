@@ -1,19 +1,23 @@
-<div class="flex flex-row justify-between pt-4">
-    <span class="text-4xl font-medium">Propriedades</span>
+<div class="flex flex-row justify-end pt-4">
     <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer"
         (click)="adicionarPropriedade()">
         Adicionar
     </button>
 </div>
-<div class="flex flex-col pt-6 gap-6">
-    <div *ngFor="let propriedade of propriedades" class="flex flex-row bg-white hover:bg-gray-200 rounded w-full cursor-pointer p-4 gap-6" (click)="navega('propriedade', propriedade.id)">
+<span class="text-2xl font-light">Propriedades</span>
+
+<div class="flex flex-col pt-2  gap-6">
+    <div *ngFor="let propriedade of propriedades"
+        class="flex flex-row bg-white hover:bg-gray-50 rounded w-full cursor-pointer p-4 gap-6"
+        (click)="navega('propriedade', propriedade.id)">
         <div class="flex flex-col justify-center gap-1">
-            <div class="text-3xl font-medium">
-                {{ propriedade.nome }}
+            <div class="text-3xl font-normal">
+                {{propriedade.nome }}
             </div>
-            <div class="text-lg text-gray-800">
-                {{ propriedade.area_agricultavel }}
+            <div class="text-1xl text-gray-800">
+                {{propriedade.area_agricultavel}}
             </div>
         </div>
+
     </div>
 </div>

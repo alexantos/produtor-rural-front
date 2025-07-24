@@ -1,18 +1,15 @@
 <div class="flex flex-row w-full h-full">
 	<div class="flex flex-col w-3/12 h-full p-3 gap-4 bg-white">
 		<img src="logo.png" />
-		<div>
-			<button mat-button class="w-full" (click)="navega('inicio')">
+		<div class="flex flex-col gap-2 pt-2">
+			<button class="flex flex-row w-full justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer" (click)="navega('inicio')">
 				<mat-icon>stacked_line_chart</mat-icon>
 				Início
 			</button>
-			<button mat-button class="w-full" (click)="navega('produtores')">
+			
+			<button class="flex flex-row w-full justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer"  (click)="navega('produtores')">
 				<mat-icon>persons</mat-icon>
 				Produtores
-			</button>
-			<button mat-button class="w-full" (click)="navega('propriedades')">
-				<mat-icon>house</mat-icon>
-				Propriedades
 			</button>
 		</div>
 	</div>
@@ -22,7 +19,7 @@
 				AN
 			</div>
 		</div>
-		<div class="p-10">
+		<div class="px-10 py-2">
 			<router-outlet></router-outlet>
 		</div>
 	</div>

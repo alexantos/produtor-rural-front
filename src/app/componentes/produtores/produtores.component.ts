@@ -8,13 +8,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProdutorService } from '../../services/produtor.service';
 import { Produtor } from '../../interfaces/produtor.interface';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
+import { MetodosEstaticos } from '../../utils';
 
 
 
 @Component({
 	selector: 'app-produtores',
 	standalone: true,
-	imports: [CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDialogModule],
+	imports: [CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule, MatDialogModule],
 	templateUrl: './produtores.component.html',
 	styleUrl: './produtores.component.scss'
 })
@@ -25,10 +29,18 @@ export class ProdutoresComponent {
 
 	produtores: Produtor[] = [];
 
+	pesquisar: FormControl = new FormControl();
+
+	metodosEstaticos = MetodosEstaticos;
+
 	constructor(private router: Router) { }
 
 	ngOnInit(): void {
 		this.listaProdutores();
+		this.pesquisar.valueChanges.pipe(debounceTime(1000), distinctUntilChanged())
+			.subscribe((filtro) => {
+				this.listaProdutores(filtro);
+			});
 	}
 
 	navega(rota: string, parametro?: string) {
@@ -36,8 +48,9 @@ export class ProdutoresComponent {
 	}
 
 
-	listaProdutores() {
-		this.produtorService.listar().subscribe({
+	listaProdutores(pesquisa: string = '') {
+		let params: HttpParams = new HttpParams().set('nome', pesquisa)
+		this.produtorService.listar(params).subscribe({
 			next: (resultado: Produtor[]) => {
 				this.produtores = resultado;
 			}
@@ -50,4 +63,6 @@ export class ProdutoresComponent {
 			this.listaProdutores();
 		});
 	}
+
+
 }

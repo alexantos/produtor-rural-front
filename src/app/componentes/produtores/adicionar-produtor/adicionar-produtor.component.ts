@@ -7,7 +7,7 @@ import { Produtor } from '../../../interfaces/produtor.interface';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 import { MatDialogRef } from '@angular/material/dialog';
-import { cpf } from 'cpf-cnpj-validator';
+import { cpf, cnpj } from 'cpf-cnpj-validator';
 import { CommonModule } from '@angular/common';
 
 
@@ -40,7 +40,7 @@ export class AdicionarProdutorComponent implements OnInit {
 			} else {
 				this.mask_cpf_cnpj = '000.000.000-009'
 			}
-			if (!cpf.isValid(value)) {
+			if (!cpf.isValid(value) && !cnpj.isValid(value)) {
 				this.produtor.controls['cpf_cnpj'].setErrors({ invalido: true })
 			}
 			console.log('valid: ', this.produtor.controls['nome'])
