@@ -1,0 +1,35 @@
+<div class="p-10">
+    <form [formGroup]="plantio">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="cultura"
+                [matAutocomplete]="culturasComplete">
+            <mat-autocomplete #culturasComplete="matAutocomplete">
+                @for (cultura of culturaFiltradas | async; track cultura) {
+                <mat-option [value]="cultura.descricao">{{cultura.descricao}}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="safra"
+                [matAutocomplete]="safrasComplete">
+            <mat-autocomplete #safrasComplete="matAutocomplete">
+                @for (safra of safraFiltradas | async; track safra) {
+                <mat-option [value]="safra.ano">{{safra.ano}}</mat-option>
+                }
+            </mat-autocomplete>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <div class="flex flex-row justify-between">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+                Cancelar
+            </button>
+            <button (click)="adicionarPlantio()"
+                class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+                Adicionar
+            </button>
+        </div>
+    </form>
+</div>

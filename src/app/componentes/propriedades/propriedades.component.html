@@ -1,11 +1,11 @@
-<div class="pt-6 gap-6">
-    <div class="flex flex-row bg-white hover:bg-gray-200 rounded w-full cursor-pointer p-4 gap-6" (click)="navega('propriedade', 'uuid')">
+<div class="flex flex-col pt-6 gap-6">
+    <div *ngFor="let propriedade of propriedades" class="flex flex-row bg-white hover:bg-gray-200 rounded w-full cursor-pointer p-4 gap-6" (click)="navega('propriedade', propriedade.id)">
         <div class="flex flex-col justify-center gap-1">
             <div class="text-3xl font-medium">
-                Nome casa
+                {{ propriedade.nome }}
             </div>
             <div class="text-lg text-gray-800">
-                123.456.789-00
+                {{ propriedade.area_agricultavel }}
             </div>
         </div>
     </div>

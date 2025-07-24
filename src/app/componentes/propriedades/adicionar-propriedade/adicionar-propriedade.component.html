@@ -1,45 +1,50 @@
 <div class="p-10">
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-        <mat-label>Fill form field</mat-label>
-        <input matInput placeholder="Placeholder">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
-    <div class="flex flex-row justify-between">
-        <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
-            Cancelar
-        </button>
-        <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
-            Adicionar
-        </button>
-    </div>
+    <form [formGroup]="propriedade">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="nome">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <mat-select formControlName="produtor">
+                @for (produtor of produtores; track produtor) {
+                <mat-option [value]="produtor.id">{{ produtor.nome }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field> -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="cidade">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="estado">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="area_total_fazenda">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="area_agricultavel">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" formControlName="area_vegetacao">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <div class="flex flex-row justify-between">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+                Cancelar
+            </button>
+            <button (click)="adicionarPropriedade()" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+                Adicionar
+            </button>
+        </div>
+    </form>
 </div>

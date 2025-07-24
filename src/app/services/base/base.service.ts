@@ -13,8 +13,8 @@ export class BaseService<Parametro> { //Parâmetro (por exemplo tipo Cliente da 
 	//     return this.httpClient.get<Paginacao<Parametro>>(environment.url_back + '/' + this.url, { params: params });
 	// }
 
-	listar(params?: HttpParams | any): Observable<Parametro> {
-		return this.httpClient.get<Parametro>(environment.url_back + '/' + this.url, { params: params });
+	listar(params?: HttpParams | any): Observable<Parametro[]> {
+		return this.httpClient.get<Parametro[]>(environment.url_back + '/' + this.url, { params: params });
 	}
 
 	pegarId(id: any): Observable<Parametro> {
