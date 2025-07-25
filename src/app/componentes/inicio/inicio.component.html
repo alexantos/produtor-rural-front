@@ -1,4 +1,4 @@
-<div class="flex flex-row w-6/12 gap-4">
+<div class="flex flex-row md:w-6/12 w-full gap-4">
     <div class="flex flex-row rounded-lg bg-white border-l-4 border-[#bf5100] w-full">
         <div class="flex flex-col w-9/12 items-center">
             <div class="text-3xl text-gray-800">
@@ -26,7 +26,7 @@
         </div>
     </div>
 </div>
-<div class="flex flex-row pt-10 gap-6">
+<div class="flex md:flex-row flex-col  pt-10 gap-6">
     <div class="w-full bg-white rounded-2xl">
         <div class="flex flex-row justify-center px-6 py-2">Plantio por Estado</div>
         <canvas baseChart class="chart" [data]="estadosChartData" [type]="'pie'" [options]="estadosChartOptions">

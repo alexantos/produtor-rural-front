@@ -52,7 +52,7 @@ export class ProdutoresComponent {
 
 
 	listaProdutores(pesquisa: string = '') {
-		let params: HttpParams = new HttpParams().set('nome', pesquisa)
+		let params: HttpParams = new HttpParams().set('nome', String(pesquisa))
 		this.produtorService.listar(params).subscribe({
 			next: (resultado: Produtor[]) => {
 				this.produtores = resultado;
