@@ -16,7 +16,7 @@
         <mat-form-field appearance="fill" class="w-full">
             <mat-label>Safra</mat-label>
             <input type="text" placeholder="Digite ou selecione uma safra" matInput formControlName="safra"
-                [matAutocomplete]="safrasComplete" >
+                [matAutocomplete]="safrasComplete">
             <mat-autocomplete #safrasComplete="matAutocomplete">
                 @for (safra of safraFiltradas | async; track safra) {
                 <mat-option [value]="safra.ano">{{safra.ano}}</mat-option>
@@ -40,7 +40,8 @@
             <button (click)="adicionarPlantio()"
                 [ngClass]="plantio.valid ? 'bg-green-500 hover:bg-green-600': 'bg-green-200'"
                 class="text-white font-medium py-2 px-4 rounded cursor-pointer">
-                Adicionar
+                <span *ngIf="!data?.plantio?.id">Adicionar</span>
+                <span *ngIf="data?.plantio?.id">Editar</span>
             </button>
         </div>
     </form>

@@ -23,7 +23,6 @@ export class ProdutorComponent implements OnInit {
 	produtor: Produtor | null = null;
 	ngOnInit(): void {
 		this.produtorService.cardsProdutor(this.produtor_id as string).subscribe((resultado) => {
-			console.log('Resultado: ', resultado);
 			this.cards = resultado;
 		});
 		this.produtorService.pegarId(this.produtor_id).subscribe((resultado) => {

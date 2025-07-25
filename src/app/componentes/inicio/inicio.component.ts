@@ -71,7 +71,6 @@ export class InicioComponent {
 
 	constructor(private graficoService: GraficoService) {
 		this.graficoService.graficoEstados().subscribe((resultado) => {
-			console.log('Grafico estados: ', resultado);
 			this.estadosChartData = {
 				labels: resultado.map((grafico: any) => grafico.descricao),
 				datasets: [
@@ -80,7 +79,6 @@ export class InicioComponent {
 			}
 		});
 		this.graficoService.graficoCultura().subscribe((resultado) => {
-			console.log('Gráfico culturas: ', resultado);
 			this.culturasChartData = {
 				labels: resultado.map((grafico: any) => grafico.descricao),
 				datasets: [
@@ -89,7 +87,6 @@ export class InicioComponent {
 			}
 		});
 		this.graficoService.graficoUsoSolo().subscribe((resultado) => {
-			console.log('Gráfico uso solo: ', resultado);
 			this.usoSoloChartData = {
 				labels: ['Total agricultável', 'Total vegetação'],
 				datasets: [

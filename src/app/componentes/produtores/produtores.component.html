@@ -7,24 +7,39 @@
             <mat-icon matIconSuffix>search</mat-icon>
         </mat-form-field>
         <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 mt-4 rounded cursor-pointer"
-            (click)="adicionarProdutor()">
+            (click)="modalProdutor()">
             Adicionar
         </button>
     </div>
 </div>
 <div class="flex flex-col pt-4 gap-4">
-    <div *ngFor="let produtor of produtores"
-        class="flex flex-row bg-white hover:bg-gray-50 rounded-2xl w-full cursor-pointer p-4 gap-6"
-        (click)="navega('produtor', produtor.id)">
-        <div class="flex flex-col w-16 h-16 bg-green-500 rounded-full text-white text-3xl items-center justify-center">
-            {{ metodosEstaticos.pegaIniciais(produtor.nome) }}
+    <div *ngFor="let produtor of produtores" class="flex flex-row bg-white rounded-2xl w-full py-4 px-6 gap-6">
+        <div class="flex flex-row w-1/12 items-center">
+            <div
+                class="flex flex-col w-10 h-10 md:w-14 md:h-14 xl:w-16 xl:h-16 bg-green-500 rounded-full text-white text-xl md:text-2xl xl:text-3xl items-center justify-center">
+                {{ metodosEstaticos.pegaIniciais(produtor.nome) }}
+            </div>
         </div>
-        <div class="flex flex-col justify-center gap-1">
+        <div class="flex flex-col justify-center w-7/12  gap-1">
             <div class="text-3xl font-normal">
                 {{produtor.nome}}
             </div>
             <div class="text-1xl text-gray-800">
                 {{produtor.cpf_cnpj_mascara}}
+            </div>
+        </div>
+        <div class="flex flex-row justify-end items-center w-4/12 gap-4">
+            <div>
+                <mat-icon class="cursor-pointer" (click)="navega('produtor', produtor.id)"
+                    matTooltip="Propriedades">home</mat-icon>
+            </div>
+            <div>
+                <mat-icon class="cursor-pointer" (click)="modalProdutor(produtor)"
+                    matTooltip="Editar produtor">edit</mat-icon>
+            </div>
+            <div>
+                <mat-icon class="cursor-pointer" (click)="deletarProdutor(produtor)"
+                    matTooltip="Deletar produtor">delete</mat-icon>
             </div>
         </div>
     </div>

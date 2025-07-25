@@ -40,6 +40,7 @@ export class AdicionarPropriedadeComponent implements OnInit {
 	produtor_id: string = '';
 
 	propriedade: FormGroup = new FormGroup({
+		id: new FormControl('', []),
 		nome: new FormControl('', [Validators.required,]),
 		produtor: new FormControl(this.data.produtor_id, [Validators.required,]), //Produtor recuperado pelo id da rota
 		cidade: new FormControl('', [Validators.required,]),
@@ -50,7 +51,9 @@ export class AdicionarPropriedadeComponent implements OnInit {
 	});
 
 	ngOnInit(): void {
-		// this.listaProdutores();
+		if (this.data?.propriedade?.id) {
+			this.propriedade.patchValue(this.data.propriedade);
+		}
 		this.propriedade.controls['area_total_fazenda'].valueChanges.subscribe(value => this.verificaTotalFazenda());
 		this.propriedade.controls['area_agricultavel'].valueChanges.subscribe(value => this.verificaTotalFazenda());
 		this.propriedade.controls['area_vegetacao'].valueChanges.subscribe(value => this.verificaTotalFazenda());
@@ -76,11 +79,19 @@ export class AdicionarPropriedadeComponent implements OnInit {
 	// }
 
 	adicionarPropriedade() {
-		this.propriedadeService.salvar(this.propriedade.value as any).subscribe({
-			next: (resultado: Propriedade) => {
-				this.fechar();
-			}
-		});
+		if (!this.data?.propriedade?.id) {
+			this.propriedadeService.salvar(this.propriedade.value as any).subscribe({
+				next: (resultado: Propriedade) => {
+					this.fechar();
+				}
+			});
+		} else {
+			this.propriedadeService.editar(this.propriedade.value as any).subscribe({
+				next: (resultado: Propriedade) => {
+					this.fechar();
+				}
+			});
+		}
 	}
 
 	fechar() {

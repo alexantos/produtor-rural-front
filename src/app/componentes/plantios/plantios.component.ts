@@ -6,11 +6,15 @@ import { PlantioService } from '../../services/plantio.service';
 import { Plantio } from '../../interfaces/plantio.interface';
 import { CommonModule } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ModalConfirmacaoComponent } from '../modal-confirmacao/modal-confirmacao.component';
+
 
 @Component({
 	selector: 'app-plantios',
 	standalone: true,
-	imports: [CommonModule, MatDialogModule],
+	imports: [CommonModule, MatDialogModule, MatIconModule, MatTooltipModule],
 	templateUrl: './plantios.component.html',
 	styleUrl: './plantios.component.scss'
 })
@@ -44,14 +48,31 @@ export class PlantiosComponent implements OnInit {
 		})
 	}
 
-	adicionarPlantio() {
+	modalPlantio(plantio?: Plantio) {
 		let dialogRef = this.dialog.open(AdicionarPlantioComponent, {
 			data: {
+				plantio: plantio,
 				propriedade_id: this.propriedade_id,
 			},
 		});
 		dialogRef.afterClosed().subscribe((resultado) => {
-			//Recarrega plantios
-		})
+			this.listaPlantios();
+		});
+	}
+
+
+	deletarPlantio(plantio: Plantio) {
+		let dialogRef = this.dialog.open(ModalConfirmacaoComponent, {
+			data: {
+				mensagem: 'Tem certeza que deseja excluir o plantio ' + plantio?.cultura_descricao + '?'
+			},
+		});
+		dialogRef.afterClosed().subscribe((resultado) => {
+			if (resultado) {
+				this.plantioService.excluir(plantio.id).subscribe((resultado) => {
+					this.listaPlantios();
+				})
+			}
+		});
 	}
 }

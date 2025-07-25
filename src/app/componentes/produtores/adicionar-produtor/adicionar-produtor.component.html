@@ -17,9 +17,15 @@
                 class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
                 Cancelar
             </button>
-            <button (click)="adicionarProdutor()" [disabled]="!produtor.valid" [ngClass]="produtor.valid ? 'bg-green-500 hover:bg-green-600': 'bg-green-200'"
+            <button (click)="adicionarProdutor()" [disabled]="!produtor.valid"
+                [ngClass]="produtor.valid ? 'bg-green-500 hover:bg-green-600': 'bg-green-200'"
                 class=" text-white font-medium py-2 px-4 rounded cursor-pointer">
-                Adicionar
+                <span *ngIf="!data?.produtor?.id">
+                    Adicionar
+                </span>
+                <span *ngIf="data?.produtor?.id">
+                    Editar
+                </span>
             </button>
         </div>
     </form>

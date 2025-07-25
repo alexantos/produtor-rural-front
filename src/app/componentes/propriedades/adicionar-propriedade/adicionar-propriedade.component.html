@@ -5,7 +5,8 @@
             <input matInput placeholder="Digite o nome da propriedade" formControlName="nome">
             <mat-error *ngIf="propriedade.controls['nome'].getError('required')">Campo obrigatório</mat-error>
         </mat-form-field>
-        <!-- <mat-form-field appearance="fill" class="w-full">
+        <!-- Exemplo para selecionar um produtor 
+        <mat-form-field appearance="fill" class="w-full">
             <mat-label>Fill form field</mat-label>
             <mat-select formControlName="produtor">
                 @for (produtor of produtores; track produtor) {
@@ -84,7 +85,8 @@
             </mat-form-field>
         </div>
         <div class="flex flex-row justify-between">
-            <button (click)="fechar()" class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
+            <button (click)="fechar()"
+                class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded cursor-pointer">
                 Cancelar
             </button>
             <button (click)="adicionarPropriedade()" [disabled]="!propriedade.valid"

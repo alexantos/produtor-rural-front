@@ -12,13 +12,16 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { MetodosEstaticos } from '../../utils';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ModalConfirmacaoComponent } from '../modal-confirmacao/modal-confirmacao.component';
+
 
 
 
 @Component({
 	selector: 'app-produtores',
 	standalone: true,
-	imports: [CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule, MatDialogModule],
+	imports: [CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule, MatDialogModule, MatTooltipModule],
 	templateUrl: './produtores.component.html',
 	styleUrl: './produtores.component.scss'
 })
@@ -57,12 +60,28 @@ export class ProdutoresComponent {
 		})
 	}
 
-	adicionarProdutor() {
-		let dialogRef = this.dialog.open(AdicionarProdutorComponent);
+	modalProdutor(produtor?: Produtor) {
+		let dialogRef = this.dialog.open(AdicionarProdutorComponent, {
+			data: { produtor: produtor },
+		});
 		dialogRef.afterClosed().subscribe((resultado) => {
 			this.listaProdutores();
 		});
 	}
 
 
+	deletarProdutor(produtor: Produtor) {
+		let dialogRef = this.dialog.open(ModalConfirmacaoComponent, {
+			data: {
+				mensagem: 'Tem certeza que deseja excluir o produtor ' + produtor.nome + ' e consequentemente todas as suas propriedades e seus plantios?'
+			},
+		});
+		dialogRef.afterClosed().subscribe((resultado) => {
+			if (resultado) {
+				this.produtorService.excluir(produtor.id).subscribe((resultado) => {
+					this.listaProdutores();
+				})
+			}
+		});
+	}
 }
